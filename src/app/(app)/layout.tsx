@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { ensureProfile } from "@/lib/profile";
 import { AppMenu } from "@/components/app/AppMenu";
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
@@ -12,6 +13,8 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
   if (!user) {
     redirect("/login");
   }
+
+  await ensureProfile(user.id, user.user_metadata?.full_name ?? user.email);
 
   return (
     <div className="flex-1 flex flex-col">
