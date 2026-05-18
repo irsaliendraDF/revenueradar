@@ -1,12 +1,14 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { ProgressBar } from "./ProgressBar";
+import { WelcomeStep } from "./WelcomeStep";
 import { CompanyBasicsForm } from "./CompanyBasicsForm";
 import { IcpForm } from "./IcpForm";
 import { FdwTiersForm } from "./FdwTiersForm";
 import { ByokStep } from "./ByokStep";
 
 type Profile = {
+  full_name: string | null;
   company_name: string | null;
   company_website: string | null;
   product_one_liner: string | null;
@@ -17,6 +19,7 @@ type Profile = {
   bad_fit_customers: { name?: string }[] | null;
   fdw_target_tiers: string[] | null;
   sales_motion: string | null;
+  onboarding_welcome_seen_at: string | null;
   onboarding_completed_at: string | null;
 };
 
@@ -58,7 +61,7 @@ export default async function OnboardingPage() {
   const { data: profile } = await supabase
     .from("profiles")
     .select(
-      "company_name, company_website, product_one_liner, typical_deal_size_min, typical_deal_size_max, current_icp, dream_customers, bad_fit_customers, fdw_target_tiers, sales_motion, onboarding_completed_at",
+      "full_name, company_name, company_website, product_one_liner, typical_deal_size_min, typical_deal_size_max, current_icp, dream_customers, bad_fit_customers, fdw_target_tiers, sales_motion, onboarding_welcome_seen_at, onboarding_completed_at",
     )
     .eq("user_id", user.id)
     .single<Profile>();
@@ -75,6 +78,15 @@ export default async function OnboardingPage() {
 
   if (profile.onboarding_completed_at) {
     redirect("/dashboard");
+  }
+
+  if (!profile.onboarding_welcome_seen_at) {
+    const firstName = profile.full_name?.trim().split(/\s+/)[0] || user.email?.split("@")[0] || "there";
+    return (
+      <div className="mx-auto max-w-2xl px-6 py-12">
+        <WelcomeStep greeting={firstName} />
+      </div>
+    );
   }
 
   const step = determineStep(profile);

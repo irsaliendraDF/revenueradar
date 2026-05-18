@@ -121,6 +121,22 @@ export async function saveFdwTiers(
   return {};
 }
 
+export async function markWelcomeSeen(): Promise<void> {
+  const { supabase, userId } = await getCurrentUserId();
+
+  const { error } = await supabase
+    .from("profiles")
+    .update({ onboarding_welcome_seen_at: new Date().toISOString() })
+    .eq("user_id", userId);
+
+  if (error) {
+    redirect(`/onboarding?error=${encodeURIComponent(error.message)}`);
+  }
+
+  revalidatePath("/onboarding");
+  redirect("/onboarding");
+}
+
 export async function completeOnboarding(): Promise<void> {
   const { supabase, userId } = await getCurrentUserId();
 
