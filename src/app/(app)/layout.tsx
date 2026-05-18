@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { AppMenu } from "@/components/app/AppMenu";
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const supabase = await createClient();
@@ -21,17 +22,7 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
             <span className="brand-display text-lg">Revenue Radar</span>
           </Link>
 
-          <div className="flex items-center gap-4">
-            <span className="hidden sm:inline text-sm text-ink/70">{user.email}</span>
-            <form action="/api/auth/signout" method="post">
-              <button
-                type="submit"
-                className="inline-flex h-9 items-center rounded-full border border-border bg-cream px-4 text-sm font-medium text-ink transition-colors hover:bg-warm-white"
-              >
-                Sign out
-              </button>
-            </form>
-          </div>
+          <AppMenu email={user.email ?? null} />
         </div>
       </header>
 
