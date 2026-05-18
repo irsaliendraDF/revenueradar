@@ -2,6 +2,11 @@
 
 A two-agent SaaS web app for B2B founders. Owner: Irene Saliendra (DigitalFlow Consulting Inc., Nova Scotia, Canada). Phase 1 in progress, build plan canonical at `docs/BUILD_PLAN.md`.
 
+- **Repo:** https://github.com/irsaliendraDF/revenueradar
+- **Live preview:** https://revenueradar-gamma.vercel.app/ (auto-deploys from `main`; push after every change, don't ask)
+- **Eventual prod domain:** https://revenueradar.digitalflowconsulting.ca/
+- **Supabase project:** `kjzsazskgtuvlutslcyk` (currently in a separate org from the MCP-accessible one)
+
 ## Stack
 
 - **Framework:** Next.js 16.2 (App Router) on Vercel. Note: build plan calls for Next 15; we bootstrapped on 16 because it shipped just before kickoff and the project is greenfield. See "Next.js 16 conventions" below for what changed.
