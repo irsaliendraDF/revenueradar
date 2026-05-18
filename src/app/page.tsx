@@ -22,7 +22,17 @@ export default function HomePage() {
 
           <p className="brand-eyebrow mb-4">B2B Account Intelligence</p>
           <h1 className="brand-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] max-w-3xl">
-            Decide <span style={{ color: "var(--gold)" }}>who to target</span> and how to reach them.
+            Decide <span style={{ color: "var(--gold)" }}>who to target</span> and{" "}
+            <span
+              style={{
+                background:
+                  "linear-gradient(180deg, transparent 62%, rgba(255, 167, 79, 0.35) 62%)",
+                paddingBottom: "0.05em",
+              }}
+            >
+              how to reach
+            </span>{" "}
+            them.
           </h1>
           <p className="mt-6 max-w-2xl text-lg text-ink/80">
             Revenue Radar runs two agents over your market. Scout researches accounts with cited sources.
