@@ -40,7 +40,7 @@ From parent doc plus Irene's May 16 sign-off:
 - **Frontend:** Next.js 15 App Router on Vercel. TypeScript. React Server Components where possible. (Local note 2026-05-18: bootstrapped on Next.js 16, which was just released and is the latest stable. Phase 1 will track Next 16 conventions, see CLAUDE.md.)
 - **Styling:** Tailwind CSS + shadcn/ui (Radix primitives). Matches Irene's existing aesthetic with custom tokens for orange #FFA74F, sage greens, cream.
 - **Database:** Supabase (Postgres 15 + Auth + Storage + Realtime). Row-level security enabled on every table.
-- **Auth:** Supabase Auth. Email magic link + Google OAuth. No password auth in v1.
+- **Auth:** Supabase Auth. Email/password (with email confirmation) + magic link. No Google OAuth or other social providers. Override of the original plan per Irene 2026-05-18, matching the Insider Hub policy after Google caused account fragmentation.
 - **Background jobs:** Inngest. Handles agent runs (5 to 15 min jobs), retries, durable execution, signal refresh cron. Native Vercel integration.
 - **Payments:** Stripe Subscriptions + Stripe Customer Portal for self-serve billing.
 - **Transactional email:** Resend (welcome, campaign ready, invoice receipts, password reset).
@@ -747,7 +747,7 @@ Replaces the Phase 1 to 5 plan in the parent doc with Claude Code-executable tas
 - **No 'AI-powered' marketing language.** Lead with outcomes and methodology, not the AI angle.
 - **No credit-based pricing language anywhere.** Always 'flat monthly', 'unlimited', or specific account counts.
 - **No LinkedIn direct scraping.** PhantomBuster + user-provided keys only at Tier 2+.
-- **No password auth.** Magic link + Google OAuth only.
+- **No Google OAuth or social providers.** Email/password + magic link only (Irene 2026-05-18, matching the Insider Hub policy after Google caused account fragmentation). The original plan called for the opposite; this overrides it.
 - **No autonomous send.** Outreach is generation only, user copies/pastes to their own tool.
 - **No mocked data in beta or public launch.** If a data source fails, the app must explain (with the source citation pattern) what couldn't be retrieved.
 - **Source attribution is non-negotiable.** Every data point in every output must have a citable source URL.

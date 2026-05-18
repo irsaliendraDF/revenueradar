@@ -8,7 +8,7 @@ A two-agent SaaS web app for B2B founders. Owner: Irene Saliendra (DigitalFlow C
 - **Language:** TypeScript (strict).
 - **Styling:** Tailwind CSS v4 (CSS-based config in `src/app/globals.css`, no JS config file). shadcn/ui to be added.
 - **Database/Auth:** Supabase (Postgres 15 + Auth + Storage + Realtime). RLS on every table.
-- **Auth:** Supabase Auth, magic link + Google OAuth. No password auth.
+- **Auth:** Supabase Auth, email/password + magic link. No Google OAuth or social providers (lesson from Insider Hub: caused account fragmentation).
 - **Background jobs:** Inngest.
 - **Payments:** Stripe Subscriptions + Customer Portal. Placeholders until Chase business account is live.
 - **Email:** Resend (transactional). Loops post-launch (marketing).
@@ -25,7 +25,7 @@ A two-agent SaaS web app for B2B founders. Owner: Irene Saliendra (DigitalFlow C
 - **No LinkedIn scraping.** PhantomBuster BYOK at Tier 2+ only.
 - **Source attribution on every data point** in every shipped output (`source_url` + `retrieved_at`).
 - **No mocked data in shipped UI.** Explain failed source retrievals.
-- **No password auth.** Magic link + Google OAuth only.
+- **Auth providers locked to email/password + magic link.** No Google OAuth, no social providers. Override of the original build plan per Irene 2026-05-18, matching the Insider Hub policy.
 - **All prices CAD.**
 
 ## Brand system
@@ -102,5 +102,5 @@ When in doubt, the upgrade guide is at `node_modules/next/dist/docs/01-app/02-gu
 
 ## Working notes
 
-- The Insider Hub project removed Google OAuth because it caused data fragmentation. Revenue Radar uses Google OAuth per build plan; mitigate the same risk by ensuring the `profiles` table is keyed strictly on `auth.users.id` and never on email, and by tracking `provider` on each session so we can surface "you already signed in with magic link, switch providers?" instead of silently creating duplicate accounts.
+- The Insider Hub project removed Google OAuth because it caused data fragmentation. Revenue Radar follows the same policy: email/password + magic link only (Irene 2026-05-18, overriding the original build plan).
 - Brand voice is "BizDev Bestie" for the marketing site and consultative for the in-product copy. Never "AI-powered" anything.
