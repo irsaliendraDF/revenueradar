@@ -60,6 +60,14 @@ export function AppMenu({ email }: { email: string | null }) {
             Dashboard
           </Link>
           <Link
+            href="/pricing"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-3 text-sm text-ink hover:bg-cream transition-colors"
+            role="menuitem"
+          >
+            Plans &amp; pricing
+          </Link>
+          <Link
             href="/settings"
             onClick={() => setOpen(false)}
             className="block px-4 py-3 text-sm text-ink hover:bg-cream transition-colors"
