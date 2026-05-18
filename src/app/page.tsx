@@ -1,7 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
-export default function HomePage() {
+type HomePageProps = {
+  searchParams: Promise<{ code?: string; next?: string; token_hash?: string; type?: string }>;
+};
+
+export default async function HomePage({ searchParams }: HomePageProps) {
+  const { code, next, token_hash, type } = await searchParams;
+
+  // Defensive: if Supabase Auth ever lands on the Site URL (root) with an
+  // auth code instead of /api/auth/callback, forward it ourselves so the
+  // user still completes the flow instead of getting stranded on the marketing page.
+  if (code) {
+    const target = new URL("/api/auth/callback", "http://localhost");
+    target.searchParams.set("code", code);
+    target.searchParams.set("next", next ?? "/dashboard");
+    if (token_hash) target.searchParams.set("token_hash", token_hash);
+    if (type) target.searchParams.set("type", type);
+    redirect(target.pathname + target.search);
+  }
+
   return (
     <main className="flex-1 flex flex-col">
       <header className="relative z-10">
