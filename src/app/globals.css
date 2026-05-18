@@ -1,26 +1,94 @@
 @import "tailwindcss";
 
+/*
+  Revenue Radar by DigitalFlow Consulting
+  Brand tokens sourced from the DigitalFlow Brand & Design System (Notion 34f7b3f7964681efbfaee0f6be952542).
+  Do not redefine these locally. Update the brand system, then update this file.
+*/
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand palette */
+  --gold: #ffa74f;
+  --peach: #ffc474;
+  --forest-deep: #3e4d34;
+  --forest: #5e734e;
+  --sage: #7d9a68;
+  --leaf: #9dc183;
+  --cream: #fff3e2;
+
+  /* Utility tokens */
+  --ink: #2a2a22;
+  --warm-white: #fffaf3;
+  --muted: #8a7d6e;
+  --border: #e0d8ce;
+
+  /* Canonical gradients */
+  --gradient-greens: linear-gradient(135deg, #3e4d34 0%, #5e734e 33%, #7d9a68 66%, #9dc183 100%);
+  --gradient-sunset: linear-gradient(135deg, #ffa74f 0%, #ffc474 100%);
+  --gradient-sunrise: linear-gradient(180deg, #ffa74f 0%, #ffc474 50%, #fff3e2 100%);
+  --gradient-paper: linear-gradient(180deg, #fffaf3 0%, #fff3e2 100%);
+
+  /* Canonical shadows */
+  --shadow-subtle: 0 2px 8px rgba(42, 42, 34, 0.06);
+  --shadow-soft: 0 4px 20px rgba(94, 115, 78, 0.10);
+  --shadow-hover: 0 8px 32px rgba(94, 115, 78, 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-gold: var(--gold);
+  --color-peach: var(--peach);
+  --color-forest-deep: var(--forest-deep);
+  --color-forest: var(--forest);
+  --color-sage: var(--sage);
+  --color-leaf: var(--leaf);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-warm-white: var(--warm-white);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-background: var(--warm-white);
+  --color-foreground: var(--ink);
+
+  --font-display: var(--font-fraunces);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+
+  --shadow-subtle: var(--shadow-subtle);
+  --shadow-soft: var(--shadow-soft);
+  --shadow-hover: var(--shadow-hover);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--gradient-paper);
+  color: var(--ink);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Eyebrow utility (Section 5 of brand system) */
+.brand-eyebrow {
+  font-family: var(--font-dm-mono), ui-monospace, monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--gold);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Display heading utility */
+.brand-display {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+/* Callout box pattern (cream bg + gold left bar) */
+.brand-callout {
+  background: var(--cream);
+  border-left: 3px solid var(--gold);
+  padding: 1rem 1.25rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-subtle);
 }
